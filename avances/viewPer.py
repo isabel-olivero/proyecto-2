@@ -27,17 +27,16 @@ class viewPer:
         n = ""
         na = st.selectbox('Seleccione su continente', ['África', 'América', 'Asia', 'Europa', 'Oceanía'])
         if na == 'África':
-            n = st.selectbox('Seleccione su pais',
-                             ["Argelia","Camerún", "Egipto",
-                              "Guinea Ecuatorial",
-                              "Kenia",
-                              "Madagascar",
-                              "Marruecos",
-                              "Nigeria",
-                              "República del Congo",
-                              "Sudáfrica",
-                              "Sudán",
-                              ])
+            n = st.selectbox('Seleccione su pais',["Argelia","Camerún", "Egipto",
+                "Guinea Ecuatorial",
+                "Kenia",
+                "Madagascar",
+                "Marruecos",
+                "Nigeria",
+                "República del Congo",
+                "Sudáfrica",
+                "Sudán",
+                ])
         elif na == 'América':
             n = st.selectbox('Seleccione su pais', [
                 'Argentina',

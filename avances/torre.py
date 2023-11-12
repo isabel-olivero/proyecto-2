@@ -31,8 +31,18 @@ class Torre:
                 aero.ubi= dispo
             else:
                 i+= 1
+        print("la nave" aero "ha sido a signada a la puerta" dispo)
         return(aero,dispo)
 
+    def despegarAeronave(aeronave):
+        flag,i=0,0
+        while((i<(len(self.aeronaves)))and flag = 0):
+            if(self.aeronaves[i].verEstado()== 2):
+                flag = 1
+        if (flag==1):
+            print("La aeronave puede despegar")
+        else:
+            print("La pista esta ocupada, la aeronave no puede despegar")
 
 
 #la aeronave puede tener una puerta fija?         

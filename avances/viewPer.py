@@ -27,16 +27,17 @@ class viewPer:
         n = ""
         na = st.selectbox('Seleccione su continente', ['África', 'América', 'Asia', 'Europa', 'Oceanía'])
         if na == 'África':
-            n = st.selectbox('Seleccione su pais',["Argelia","Camerún", "Egipto",
-                "Guinea Ecuatorial",
-                "Kenia",
-                "Madagascar",
-                "Marruecos",
-                "Nigeria",
-                "República del Congo",
-                "Sudáfrica",
-                "Sudán",
-                ])
+            n = st.selectbox('Seleccione su pais',
+                             ["Argelia","Camerún", "Egipto",
+                              "Guinea Ecuatorial",
+                              "Kenia",
+                              "Madagascar",
+                              "Marruecos",
+                              "Nigeria",
+                              "República del Congo",
+                              "Sudáfrica",
+                              "Sudán",
+                              ])
         elif na == 'América':
             n = st.selectbox('Seleccione su pais', [
                 'Argentina',
@@ -160,6 +161,7 @@ class viewPer:
                 else:
                     time.sleep(3)
                     st.success('Enviado!')
+                    #funcion de asignar   asignarPuesto(puesto)
         return {
             "Nombre ": nombre, "Nacimiento ": naci, "Genero ": gen, "Direccion ": dire, "Correo ": corr,
             "Telefono ": telefono, "Horas de trabajo": horas, "Años de experiencia ": years,
@@ -178,6 +180,7 @@ class viewPer:
                  "Cantidad de Maletas": pasa.maleta, "Vuelo": pasa.vuelo})
         if informacion:
             st.table(informacion)
+
 
     def verInfoTripulacion(self, lt):
         st.header("Ver info tripulantes")

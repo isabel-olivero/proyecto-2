@@ -7,7 +7,7 @@ class viewPer:
     def menuPer(self):
         sel = st.sidebar.selectbox("Selecciona lo que se desea hacer",
                                    ["Reservar", "Registro como Pasajero", "Registro como Tripulante",
-                                    "Ver info pasajeros o tripulación"])
+                                    "Ver info pasajeros","Ver info tripulación"])
         return sel
 
     #        if sel == "Reservar":
@@ -106,6 +106,7 @@ class viewPer:
         name = st.text_input("Ingresa tu nombre completo: ")
         if not name:
             st.error("Esta informacion es obligatoria")
+        iden = st.number_input("ID",min_value=0, step=1)
         nacimiento = st.date_input("Ingrese la fecha de nacimiento: ")
         genero = st.selectbox('Seleccione su genero ', ['Femenino', 'Masculino', 'Otro'])
         direccion = st.text_input("Ingresa tu direccion de residencia: ")
@@ -124,23 +125,25 @@ class viewPer:
         maleta = st.slider('Cuantas maletas vas a llevar?', 0, 12, 1)
         if maleta is None:
             st.error('Debes seleccionar un número.')
-
-        if st.button('Enviar Informacion Personal'):
+        enviar = st.button("Enviar Informacion Personal",type="primary")
+        if enviar:
             with st.spinner('enviando...'):
                 if (not name) or (not direccion) or (not correo):
                     st.error("Debes ingresar los datos obligatorios")
                 else:
                     time.sleep(3)
                     st.success('Enviado!')
-        return {
-            "Nombre ": name, "Nacimiento ": nacimiento, "Genero ": genero, "Direccion ": direccion, "Correo ": correo,
-            "Telefono ": tel, "Nacionalidad ": nacionalidad, "Informacion Medica ": med, "Maletas": maleta
-        }
+                    return {
+                        "ID": iden,
+                        "Nombre": name,
+                        "Telefono": tel
+                        }
 
     def datosTripulacion(self):
         nombre = st.text_input("Ingrese su nombre completo: ", "")
         if not nombre:
             st.error("Esta informacion es obligatoria")
+        iden = st.number_input("ID",min_value=0, step=1)
         naci = st.date_input("Ingresar fecha de nacimiento: ")
         gen = st.selectbox('Seleccione su genero ', ['Femenino', 'Masculino', 'Otro'])
         dire = st.text_input("Ingrese su direccion de residencia: ", "")
@@ -162,11 +165,11 @@ class viewPer:
                     time.sleep(3)
                     st.success('Enviado!')
                     #funcion de asignar   asignarPuesto(puesto)
-        return {
-            "Nombre ": nombre, "Nacimiento ": naci, "Genero ": gen, "Direccion ": dire, "Correo ": corr,
-            "Telefono ": telefono, "Horas de trabajo": horas, "Años de experiencia ": years,
-            "Puesto de trabajo ": puesto
-        }
+                    return {
+                        "ID": iden,
+                        "Nombre": nombre,
+                        "Telefono": telefono
+                    }
 
     def verInfoPasajeros(self, lp):
         st.header("Ver info pasajeros")

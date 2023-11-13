@@ -40,8 +40,6 @@ class aerolinea:
         iden = self.view.pedirId(len(reLi))
         p = reLi[iden]
         puesto = p.puesto
-        tripu = []
-        cap,copi,az,k= 0,0,0,0
         cap = vuelo.cap
         copi = vuelo.copi
         az = vuelo.az 

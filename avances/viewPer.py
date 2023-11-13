@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-
+from PIL import Image
 
 class viewPer:
 
@@ -24,20 +24,23 @@ class viewPer:
     #     self.verInfoTripulacion()
 
     def nacio(self):
+        paises ={"Argelia":'argelia.png', "Camerún":'acamerun.png', "Egipto":'aegipto.png', "Guinea Ecuatorial":'aguinea.png', "Madagascar":'amadagascar.png', "Marruecos":'amarruecos.png', "Nigeria":'aniggeria.png', "Sudáfrica":'asurafrica.png', "Sudán":'asudan.png'}
         n = ""
         na = st.selectbox('Seleccione su continente', ['África', 'América', 'Asia', 'Europa', 'Oceanía'])
         if na == 'África':
             n = st.selectbox('Seleccione su pais',
                              ["Argelia","Camerún", "Egipto",
                               "Guinea Ecuatorial",
-                              "Kenia",
                               "Madagascar",
                               "Marruecos",
                               "Nigeria",
-                              "República del Congo",
                               "Sudáfrica",
                               "Sudán",
                               ])
+            for clave in paises:
+                if(clave == n):
+                    image = Image.open(paises[clave])
+                    st.image(image, caption='Bandera del pais al cual viaja')
         elif na == 'América':
             n = st.selectbox('Seleccione su pais', [
                 'Argentina',
@@ -125,7 +128,7 @@ class viewPer:
         maleta = st.slider('Cuantas maletas vas a llevar?', 0, 12, 1)
         if maleta is None:
             st.error('Debes seleccionar un número.')
-        enviar = st.button("Enviar Informacion Personal",type="primary")
+        enviar = st.button("Enviar Informacion Personal", type="primary")
         if enviar:
             with st.spinner('enviando...'):
                 if (not name) or (not direccion) or (not correo):
@@ -157,7 +160,7 @@ class viewPer:
         years = st.slider('Cuantos años de experiencia tienes? ', 0, 50, 4)
         puesto = st.selectbox("Cual es tu puesto de trabajo",
                               ['Piloto', 'Copiloto', 'Trpulante de cabina', 'Policia aereo'])
-        if st.button('Enviar Informacion Personal'):
+        if st.button('Enviar Informacion Personal',type="primary"):
             with st.spinner('enviando...'):
                 if (not nombre) or (not dire) or (not corr):
                     st.error("Debes ingresar los datos obligatorios")

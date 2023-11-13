@@ -15,9 +15,10 @@ class aerolinea:
     def agregarVuelo(self, vuelo):  # agrega un nuevo vuelo a la lista de vuelo de la aerolinea
         self.vuelos.append(vuelo)
 
-    def mostrarVuelos(self):  # muestra los vuelos existententes en la aerolinea
+    def mostrarVuelos():# muestra los vuelos existententes disponibles en la aerolinea
         for t in range(len(self.vuelos)):
-            self.vuelos[t].mostrarVuelo()
+            if(self.vuelos[t].sillasV > 0):
+                self.vuelos[t].mostrarVuelo()
 
     def agregarTripulante(self, tripulante):  # agrega un nuevo tripulante a la lista de tripulantes de la aerolinea
         self.tripulacion.append(tripulante)
@@ -55,3 +56,5 @@ class aerolinea:
 
         if ((cap == 1) and (copi == 1) and (az == 1) and (pol == 1)):
             print("Tripulacion completada")
+
+

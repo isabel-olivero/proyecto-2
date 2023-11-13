@@ -46,19 +46,19 @@ class aerolinea:
         pol = vuelo.pol
      
         if((cap = 0) and (puesto == 'Piloto')):
-            cap = 1
+            vuelo.cap = 1
             vuelo.tripulacion.append(p)
         elif((copi = 0) and(puesto == 'Copiloto')):
-            copi= 1
+            vuelo.copi = 1
             vuelo.tripulacion.append(p)
         elif((az = 0) and(puesto == 'Tripulante de cabina')):
-            az=1
+            vuelo.az = 1
             vuelo.tripulacion.append(p)
         elif((pol=0) and (puesto == 'Policia aereo')):
-            pol=1
+            vuelo.pol = 1
             vuelo.tripulacion.append(p)
             
-        if((cap = 1)and (copi= 1) and(az = 1)):
+        if((cap = 1) and (copi = 1) and (az = 1) and (pol = 1)):
             print("Tripulacion completada")
 
 

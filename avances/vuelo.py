@@ -1,7 +1,11 @@
 class vuelo:
-    def __init__(self,des,date,s,n,a,j,h):
+    def __init__(self,des,date,s,n,a,j,h,cap,copi,az,po):
         self.sillasV= s
         self.idVuelo = n
+        self.cap = cap
+        self.copi = copi
+        self.az = az
+        self.pol = pol
         #self.pasajeros =[]
         self.des= des
         self.fecha = date

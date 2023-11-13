@@ -7,6 +7,8 @@ class aeropuerto:
         nave= crearAeronave()#funcion que crea la aeronave
         n = nave.sillas# numero de sillas de la aeronave
         vuelo = vuelo(des,date,n,id)
+        creado=(nave,vuelo)
+        self.histVuelos.append(creado)
         print("su vuelo se ha creado exitosamente:")
         vuelo.mostrarVuelo()
         

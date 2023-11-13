@@ -1,5 +1,5 @@
 class vuelo:
-    def __init__(self,des,date,s,n,a,j,h,cap,copi,az,po):
+    def __init__(self,des,date,s,n,a,j,h,cap,copi,az,pol):
         self.sillasV= s
         self.idVuelo = n
         self.cap = cap
@@ -18,22 +18,24 @@ class vuelo:
         self.pasajerosJ = []
 
     def reservar(self,pasajero,selec):
-        if(selec=="Avion"):
+        no=0
+        if(selec=="Avión"):
             if(self.sillasA>0):
                 self.sillasA -= 1
                 self.pasajerosA.append(pasajero)
             else:
-                print("No es posible reservar")
-        elif(selec=="Helicoptero"):
+                no=1
+        elif(selec=="Helicóptero"):
             if(self.sillasH>0):
                 self.sillasH -= 1
                 self.pasajerosH.append(pasajero)
             else:
-                print("No es posible reservar")
+                no=1
         elif(selec=="Jet"):
             if(self.sillasJ>0):
                 self.sillasJ -= 1
                 self.pasajerosJ.append(pasajero)
             else:
-                print("No es posible reservar")
+                no=1
+        return no
             

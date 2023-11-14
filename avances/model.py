@@ -79,7 +79,7 @@ class modelo:
             st.session_state['vuelo'] = {}
             self.vu = {}
 
-    def ingresarPasajero(self,id,liPa):
+    def ingresarPasajero(self,id,liPa):   # las funciones de ingresar son las encargadas de guardar los datos con la ayuda del session_state
         self.liPa[id] = liPa
         st.session_state['Pasajeros'] = self.liPa
 
@@ -96,7 +96,7 @@ class modelo:
         self.vu[0] = vuelo
         st.session_state['vuelo'] = self.vu
 
-    def retornarN(self):
+    def retornarN(self):   # las funciones de retornar estan encargadas de devolver las listas creadas, las de Nave,pasajeros y tripulacion
         return self.naves
 
     def retornarP(self):
@@ -105,61 +105,59 @@ class modelo:
     def retornarT(self):
         return self.liTri
 
-    def posNav(self,nav):
-        cnt=0
-        for posi in self.naves:
-            cnt += 1
-            if (cnt == nav):
-                nave = self.naves[posi]
-                return nave
-    def posPas(self,num):
-        cnt=0
-        for i in self.liPa:
-            cnt += 1
-            if (cnt == num):
-                pas = self.liPa[i]
-                return pas
 
-    def dame_sillas_tipo(self,cual):
+
+    def dame_sillas(self):   #esta funcion retorna el numero de sillas que se encuentra en una de las posiciones de la lista de naves
+
         reLi = self.retornarN()
         iden = self.view.pedirId()
-        p = reLi[iden + 1]
-        if cual == "Sillas":
-            puesto = p.per
-            return puesto
+        if iden > len(reLi):
+            st.error("Por ahora ese número no es valido")
         else:
-            puesto = p.tipo
+            p = reLi[iden + 1]
+            puesto = p.per
             return puesto
         # st.subheader(puesto)
 
-    def dame_nombre(self):
+    def dame_nombre(self):  # esta funcion retorna el nombre de la persona, que se encuentra en una de las posiciones de la lista de pasajeros
         rePa = self.retornarP()
         tefi = self.view.pedirId2()
-        n = rePa[tefi]
-        nom = n.name
-        return nom
+        if tefi > len(rePa):
+            st.error("Por ahora ese número no es valido")
+        else:
+            n = rePa[tefi]
+            nom = n.name
+            return nom
 
-    def reserva(self):
-
-        sillas = self.dame_sillas_tipo("Sillas")
-        name = self.dame_nombre()
-        cual = self.dame_sillas_tipo("Tipo")
+    def reserva(self): #como dice su nombre, es la que permite realizar una reserva
+        sillas = self.dame_sillas()
         st.header(sillas)
-        st.header(name)
-        st.header(cual)
-        #no = vuelo.vuelo(s=0, a=0, j=0, h=0).reservar(cual,sillas,name)
-        #if no == 1:
-         #   st.info("No se pudo completar la reserva,aeronave llena")
-        #else:
-#            st.success("Reserva exitosa")
 
-    def generarAvion(self):
+        if( sillas == None):
+            st.error("Valor no disponible")
+            #st.error("Lo sentimos ha ocurrido un error, trataremos de solucionarlo lo antes posible")
+        else:
+            name = self.dame_nombre()
+            if name== None:
+                st.error("Lo sentimos ha ocurrido un error, trataremos de solucionarlo lo antes posible")
+            else:
+                cual = viewGeneral.viewGeneral().cualNave()
+                no = vuelo.vuelo().reservar(cual,sillas,name)
+                if no == 1:
+                    st.info("No se pudo completar la reserva,aeronave llena")
+                else:
+                    st.success("Reserva exitosa")
+
+    def generarAvion(self):    #y estas 3 funciones de generar son las encargadas de poder crear y retornar las naves que se pidan generar
         avion = aeropuerto.aeropuesto().generarAvion()
+        vuelo.vuelo().naves.append(avion)
         return avion
 
     def generarHelicoptero(self):
         heli = aeropuerto.aeropuesto().generarHelicoptero()
+        vuelo.vuelo().naves.append(heli)
         return heli
     def generarJet(self):
         jet = aeropuerto.aeropuesto().generarJet()
+        vuelo.vuelo().naves.append(jet)
         return jet

@@ -42,7 +42,7 @@ class control:
         elif sel == 'selecciona':
             self.view.fondo()
         elif sel == 'Asignar tripulacion':
-            self.cambioDeEstado()
+            self.asignarTripu()
         elif sel =='Entrar a Torre':
             pass
 

@@ -114,8 +114,8 @@ class control:
                     numero = self.cnt()
                     je = model.infoNaveModel(j["Tipo de nave"],j["Año de viejo"], j["Estado"], j["Marca"], j["Modelo"], j["Destino"], j["Sillas"], j['Categoria'],j["Propietario"])
                     self.model.ingresarNaves(numero,je)
-            else:
-                st.error("No se pueden crear más jets")
+                else:
+                    st.error("No se pueden crear más jets")
     def mostrarNaves(self):
         nave = self.model.retornarN()
         self.view.verInfoNaves(nave)

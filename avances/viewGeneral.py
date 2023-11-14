@@ -143,7 +143,10 @@ class viewGeneral:
             informacion.append({"ID": n.id,"Tipo de nave": n.tipo,"Año de viejo": n.yearFab,"Estado": n.estado,"Marca": n.marca,"Modelo": n.modelo,"Destino": n.destino,"Sillas": n.per,"Categoria": n.categoria,"Propietario": n.propietario })
         if informacion:
             st.table(informacion)
-
+            
+    def elemTorre(self):
+        sel = st.selectbox("Que deseas hacer en torre", ['generarPuertas','ubicarPuerta','despegarAeronave','borrarAeronave','agregarHist'])
+        return sel
 
     def propi(self):
         nombre= st.text_input("Ingresa nombre de propietario")

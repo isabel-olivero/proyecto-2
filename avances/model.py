@@ -2,6 +2,7 @@ import streamlit as st
 import vuelo
 import aeropuerto
 import viewGeneral
+import torre
 class infoNaveModel:
     def __init__(self,id,tipo,yearFab,estado,marca,modelo,destino,per,cate,propietario):
         self.tipo = tipo
@@ -166,3 +167,6 @@ class modelo:
         jet = aeropuerto.aeropuesto().generarJet()
         vuelo.vuelo().naves.append(jet)
         return jet
+    def generarPuerta(self):
+        torre.Torre(name="",loc="").generarPuertas()
+        self.view.im()

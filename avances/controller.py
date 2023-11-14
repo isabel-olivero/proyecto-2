@@ -91,7 +91,7 @@ class control:
 
     def mostrarTri(self):
         liT = self.model.retornarT()
-        self.view.verInfoTripulacion(liT,"No asignado")
+        self.view.verInfoTripulacion(liT,"No asignado",None)
 
 
 

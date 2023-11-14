@@ -43,7 +43,22 @@ class control:
             self.view.fondo()
         elif sel == 'Asignar tripulacion':
             self.cambioDeEstado()
+        elif sel =='Entrar a Torre':
+            pass
 
+
+    def torre(self):
+        sel= self.view.elemTorre()
+        if sel =='generarPuertas':
+            self.model.generarPuerta()
+        elif sel=='ubicarPuerta':
+            ubi = self.model.ubicarPuerta()
+        elif sel=='despegarAeronave':
+            pass
+        elif sel =='borrarAeronave':
+            pass
+        elif sel=='agregarHist':
+            pass
     def cnt(self):
         st.session_state['cnt'] = st.session_state['cnt'] + 1
         return st.session_state['cnt']

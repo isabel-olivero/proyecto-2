@@ -1,8 +1,8 @@
 import streamlit as st
+import aerolinea
 import vuelo
 import aeropuerto
 import viewGeneral
-import torre
 class infoNaveModel:
     def __init__(self,id,tipo,yearFab,estado,marca,modelo,destino,per,cate,propietario):
         self.tipo = tipo
@@ -132,12 +132,14 @@ class modelo:
             if(tefi in rePa):
                 n = rePa[tefi]
                 nom = n.name
+                st.subheader(nom)
                 return nom
 
     def reserva(self): #como dice su nombre, es la que permite realizar una reserva
         sillas = self.dame_sillas()
         st.title('sillas disponibles:')
         st.header(sillas)
+        
 
         if( sillas == None):
             st.error("Valor no disponible")
@@ -148,11 +150,14 @@ class modelo:
                 st.error("Lo sentimos ha ocurrido un error, trataremos de solucionarlo lo antes posible")
             else:
                 cual = viewGeneral.viewGeneral().cualNave()
-                no = vuelo.vuelo().reservar(cual,sillas,name)
+                no = vuelo.vuelo().reservar(cual,name)
                 if no == 1:
-                    st.info("No se pudo completar la reserva,aeronave llena")
+                    if st.button('Reservar'):
+                        st.success("Reserva exitosa")
+                        
+                    
                 else:
-                    st.success("Reserva exitosa")
+                    st.info("No se pudo completar la reserva,aeronave llena")
 
     def generarAvion(self):    #y estas 3 funciones de generar son las encargadas de poder crear y retornar las naves que se pidan generar
         avion = aeropuerto.aeropuesto().generarAvion()
@@ -167,10 +172,3 @@ class modelo:
         jet = aeropuerto.aeropuesto().generarJet()
         vuelo.vuelo().naves.append(jet)
         return jet
-    def generarPuerta(self):
-        torre.Torre(name="",loc="").generarPuertas()
-        self.view.im()
-    def ubicarPuerta(self):
-        nav = self.retornarN()
-        ubi = torre.Torre(name="",loc="").ubicarPuerta(nav)
-        return ubi

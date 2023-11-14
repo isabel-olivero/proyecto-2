@@ -1,23 +1,20 @@
-import torre
 import vuelo
 import aeronave
 import viewGeneral
 import streamlit as st
 import time
 import random
-
-
+import paises
 class aeropuesto:
     def __init__(self):
-        self.nombre= name
-        self.histVuelos=[]
-        self.torre= torre
-        self.avion = aeronave.Avion(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
+        self.avion = aeronave.Avion(id = 0,tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
                  altMax=0, cantMotor=0, categoria="",propietario="")
-        self.heli = aeronave.Helicoptero(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="",destino="", cap=0, copi=0, az=0, pol=0, rotores=0,
+        self.heli = aeronave.Helicoptero(id=0 , tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="",destino="", cap=0, copi=0, az=0, pol=0, rotores=0,
                  capEle=0, categoria="",propietario="")
-        self.jet = aeronave.Jet(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
+        self.jet = aeronave.Jet(id=0, tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
                  propietario="", servicios="", desFre=[])
+        self.vuelo = vuelo.vuelo()
+        self.pais = paises.pais()
 
     def generarAvion(self):
         self.avion.tipo = "Avión"
@@ -37,12 +34,16 @@ class aeropuesto:
         self.avion.cantMotor = motor
         self.avion.estado = "En servicio"
         st.write("Selcciona el destino")
-        self.avion.destino = viewGeneral.viewGeneral().persona.nacio()
+        #self.avion.destino = viewGeneral.viewGeneral().persona.nacio()
+        self.avion.destino = self.pais.selecpais()
         if st.button('Creando nave',type="primary"):
             with st.spinner('enviando...'):
                 time.sleep(3)
                 st.success('Enviado!')
+                self.vuelo.sillasA += self.avion.cantPas
+                self.vuelo.sillasV += self.avion.cantPas
                 return {
+                    "ID": self.avion.id,
                     "Tipo de nave": self.avion.tipo,
                     "Año de viejo": self.avion.yearFab,
                     "Estado":  self.avion.estado,
@@ -65,7 +66,7 @@ class aeropuesto:
         categoria = viewGeneral.viewGeneral().seleccionaCategoria("Helicóptero")
         self.heli.marca = viewGeneral.viewGeneral().marca()
         st.write("Selcciona el destino")
-        self.heli.destino = viewGeneral.viewGeneral().persona.nacio()
+        self.heli.destino = self.pais.selecpais()
         self.heli.categoria = categoria
         self.heli.modelo = "Top AirService"
         self.heli.estado = "En servicio"
@@ -73,7 +74,10 @@ class aeropuesto:
             with st.spinner('enviando...'):
                 time.sleep(3)
                 st.success('Enviado!')
+                self.vuelo.sillasH += self.heli.cantPas
+                self.vuelo.sillasV += self.heli.cantPas
                 return {
+                    "ID": self.heli.id,
                     "Tipo de nave": self.heli.tipo,
                     "Año de viejo": self.heli.yearFab,
                     "Estado": self.heli.estado,
@@ -93,7 +97,7 @@ class aeropuesto:
         self.jet.marca = viewGeneral.viewGeneral().marca()
         self.jet.propietario = viewGeneral.viewGeneral().propi()
         st.write("Selcciona el destino")
-        self.jet.destino = viewGeneral.viewGeneral().persona.nacio()
+        self.jet.destino = self.pais.selecpais()
         self.jet.modelo = "Top AirService"
         self.jet.estado = "En servicio"
         if st.button('Creando nave', type="primary"):
@@ -103,7 +107,10 @@ class aeropuesto:
                 with st.spinner('enviando...'):
                     time.sleep(3)
                     st.success('Enviado!')
+                    self.jet.cantPas += self.jet.cantPas
+                    self.vuelo.sillasV +=  self.jet.cantPas
                     return {
+                        "ID": self.jet.id,
                         "Tipo de nave": self.jet.tipo,
                         "Año de viejo": self.jet.yearFab,
                         "Estado": self.jet.estado,
@@ -115,24 +122,3 @@ class aeropuesto:
                         "Propietario": self.jet.propietario
                     }
 
-
-
-    
-    def crearVuelo(des,date,id):
-        nave= crearAeronave()#funcion que crea la aeronave
-        n = nave.sillas# numero de sillas de la aeronave
-        vuelo = vuelo(des,date,n,id)
-        creado=(nave,vuelo)
-        self.histVuelos.append(creado)
-        print("su vuelo se ha creado exitosamente:")
-        vuelo.mostrarVuelo()
-
-    def darSalida(aeronave):
-        self.torre.ubicarPuerta(aeronave)
-        self.torre.despegarAeronave(aeronave)
-        self.torre.borrarAeronave(aeronave)
-
-        return aeronave
-    
-
-        

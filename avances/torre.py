@@ -1,5 +1,6 @@
 import puerta
 
+
 class Torre:
     def __init__(self, name, loc):
         self.nombre = name
@@ -34,15 +35,23 @@ class Torre:
         print("la nave" aero "ha sido a signada a la puerta" dispo)
         return(aero,dispo)
 
-    def despegarAeronave(aeronave):
+    def despegarAeronave(self, aeronave):
         flag,i=0,0
         while((i<(len(self.aeronaves)))and flag = 0):
-            if(self.aeronaves[i].verEstado()== 2):
+            if(self.aeronaves[i].verEstado()== 2):#verifica que no hayan naves en la pista
                 flag = 1
-        if (flag==1):
+        if (flag==0):
             print("La aeronave puede despegar")
+            aeronave.estado= 2
         else:
             print("La pista esta ocupada, la aeronave no puede despegar")
+
+    def borrarAeronave(self, aero):
+        if(aero.verEstado==2):
+            aero.estado==3
+            self.aeronaves.remove(aero)
+
+
 
 
 #la aeronave puede tener una puerta fija?         

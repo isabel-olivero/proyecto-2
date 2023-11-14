@@ -1,11 +1,17 @@
+import torre
 import vuelo
 import aeronave
 import viewGeneral
 import streamlit as st
 import time
 import random
+
+
 class aeropuesto:
     def __init__(self):
+        self.nombre= name
+        self.histVuelos=[]
+        self.torre= torre
         self.avion = aeronave.Avion(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
                  altMax=0, cantMotor=0, categoria="",propietario="")
         self.heli = aeronave.Helicoptero(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="",destino="", cap=0, copi=0, az=0, pol=0, rotores=0,
@@ -109,3 +115,24 @@ class aeropuesto:
                         "Propietario": self.jet.propietario
                     }
 
+
+
+    
+    def crearVuelo(des,date,id):
+        nave= crearAeronave()#funcion que crea la aeronave
+        n = nave.sillas# numero de sillas de la aeronave
+        vuelo = vuelo(des,date,n,id)
+        creado=(nave,vuelo)
+        self.histVuelos.append(creado)
+        print("su vuelo se ha creado exitosamente:")
+        vuelo.mostrarVuelo()
+
+    def darSalida(aeronave):
+        self.torre.ubicarPuerta(aeronave)
+        self.torre.despegarAeronave(aeronave)
+        self.torre.borrarAeronave(aeronave)
+
+        return aeronave
+    
+
+        

@@ -71,9 +71,14 @@ class viewGeneral:
         if informacion:
             st.table(informacion)
 
-    def pedirId(self,num):
-        ide=st.number_input("Ingresa la posición ", min_value=1,step=1,max_value=num)
-        return ide
+    def pedirId(self):
+        id = st.number_input("Ingresa tu id",min_value= len(model.modelo().retornarP()),step=1)
+        return id
+
+    def pedirId2(self):
+        number = st.slider("Ingresa la posición de la nave que desee", min_value=1, max_value=10)
+        return number
+
 
     def cualNave(self):
         sel= st.selectbox("En cúal nave deseas reservar:", ["Avión", "Helicóptero", "Jet"])
@@ -81,12 +86,45 @@ class viewGeneral:
 
     def error(self):
         #st.info("Por el momento no hay aeronaves disponibles")
-        st.info("No hay pasajeros registrados")
+        st.info("Por el momento no se puede reservar")
 
-    def fonfo(self):
+    def fondo(self):
         st.header("Aeropuerto Internacional Alfonso Bonilla Aragón")
         st.write("Una experiencia para contar :helicopter:  :airplane_departure:")
         img = Image.open('aeropuertoAlfonso.jpg')
         st.image(img,caption="Aeropuerto Internacional Alfonso Bonilla Aragón",width=735)
         st.link_button("Ver historia y la actualidad","https://www.i-torrestrella.com/aeropuerto-alfonso-bonilla-aragon-de-cali-historia-y-situacion-actual/")
 
+    def seleccionaCategoria(self,nave):
+        if(nave == "Avión"):
+            sele = st.selectbox("Selecciona categoria de Avión",["Carga","Transporte","Militar"])
+            return sele
+        elif(nave == "Helicóptero"):
+            sele = st.selectbox("Selecciona categoria de Helicóptero",["Rescate", "Turismo", "Transporte","Fuerza policial", "Ambulancia" ])
+            return sele
+
+    def marca(self):
+        mar = st.selectbox("Selecciona la marca de la aeronave",["ArgueFlight","GIAL Air","Latem","AC Air","AFGM"])
+        return mar
+
+    def nave(self):
+        nav = st.selectbox("Selecciona la nave que se desee crear",["Avión","Helicóptero","Jet"])
+        return nav
+
+    def verInfoNaves(self, nave):
+        st.header("Ver informacion de aeronaves")
+        st.write("Información primordial de la aeronave")
+        informacion = []
+        for info in nave:
+            n = nave[info]
+            informacion.append({"ID": n.id,"Tipo de nave": n.tipo,"Año de viejo": n.yearFab,"Estado": n.estado,"Marca": n.marca,"Modelo": n.modelo,"Destino": n.destino,"Sillas": n.per,"Categoria": n.categoria,"Propietario": n.propietario })
+        if informacion:
+            st.table(informacion)
+
+
+    def propi(self):
+        nombre= st.text_input("Ingresa nombre de propietario")
+        if not nombre:
+            st.error("Debes ingreasar un nombre")
+        else:
+            return nombre

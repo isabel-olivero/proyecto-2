@@ -1,15 +1,22 @@
-
+import streamlit as st
 class vuelo:
-    def __init__(self,s,a,j,h):
-        self.sillasV= s
+    def __init__(self):
+        self.sillasV= 120
         self.naves =[]
         self.origen = "Cali"
-        self.sillasA = a
-        self.sillasJ = j
-        self.sillasH =h
+        self.sillasA = 40
+        self.sillasJ = 40
+        self.sillasH = 40
         self.pasajerosA = []
         self.pasajerosH = []
         self.pasajerosJ = []
+
+        if 'Vuelo' not in st.session_state:
+            st.session_state['Vuelo'] = {}
+            self.liTri = {}
+        else:
+            self.liTri = st.session_state['Vuelo']
+
 
         def setId(self, sillasV):
             self.sillasV = sillasV
@@ -25,29 +32,24 @@ class vuelo:
 
 
 
-    def reservar(self,pasajero,nave):
+    def reservar(self,selec,silla,name): #la funcion principal que permite generar la reserva
         no=0
-        selec = nave["Tipo de nave"]
-        silla = nave["Sillas"]
         if(selec=="Avión"):
-            if(self.sillasA>0 and silla>0):
-                nave["Sillas"] -= 1
+            if silla>0:
                 self.sillasA -= 1
-                self.pasajerosA.append(pasajero)
+                self.pasajerosA.append(name)
             else:
                 no=1
         elif(selec=="Helicóptero"):
-            if(self.sillasH>0 and silla>0):
-                nave["Sillas"] -= 1
+            if silla>0:
                 self.sillasH -= 1
-                self.pasajerosH.append(pasajero)
+                self.pasajerosH.append(name)
             else:
                 no=1
         elif(selec=="Jet"):
-            if(self.sillasJ>0 and silla>0 ):
-                nave["Sillas"] -= 1
+            if silla>0:
                 self.sillasJ -= 1
-                self.pasajerosJ.append(pasajero)
+                self.pasajerosJ.append(name)
             else:
                 no=1
         return no

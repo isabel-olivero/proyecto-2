@@ -13,9 +13,17 @@ class viewGeneral:
         #self.torre = viewTorre
 
 
-
+    def cambio(self, tri):
+        data = []
+        for num in tri:
+            t = tri[num]
+            data.append(t.id)
+        Id = st.selectbox('Seleccione el ID de la tarea a completar:', data)
+        boton= st.button("Marcar como asignada", type="primary")
+        if boton:
+            return Id
     def menu(self):
-        option= st.sidebar.selectbox("Selecciona una opcion",["selecciona","Reservar","Registro como Pasajero","Registro como Tripulante","Ver info pasajeros","Ver info tripulación","iniciar sesion","crear aeronave","ver info de aeronaves"])
+        option= st.sidebar.selectbox("Selecciona una opcion",["selecciona","Reservar","Registro como Pasajero","Registro como Tripulante","Ver info pasajeros","Ver info tripulación","crear aeronave","ver info de aeronaves","Asignar tripulacion"])
         return option
 
     def registrarPasajero(self):
@@ -61,18 +69,33 @@ class viewGeneral:
                 st.table(informacion)
             else:
                 st.info("Todavia no hay pasajeros registrados")
-    def verInfoTripulacion(self, lt):
+
+    def verInfoTripulacion(self, lt,asi,cnt):
         st.header("Ver info tripulantes")
         st.write("Información primordial del tripulante")
         informacion = []
+        cntl=0
         for info in lt:
-            tripu = lt[info]
-            informacion.append({"ID": tripu.id,"Nombre ": tripu.name,"Telefono ": tripu.telefono,"Puesto": tripu.puesto,"Estado": tripu.state})
+            if cnt is not None and cnt-1 == cntl:
+                tripu = lt[info]
+                tripu.state = asi
+                informacion.append(
+                {"ID": tripu.id, "Nombre ": tripu.name, "Telefono ": tripu.telefono, "Puesto": tripu.puesto,
+                "Estado": tripu.state})
+
+            else:
+                tripu = lt[info]
+                informacion.append(
+                    {"ID": tripu.id, "Nombre ": tripu.name, "Telefono ": tripu.telefono, "Puesto": tripu.puesto,
+                     "Estado": tripu.state})
+            cntl += 1
+
+
         if informacion:
             st.table(informacion)
 
     def pedirId(self):
-        id = st.number_input("Ingresa tu id",min_value= len(model.modelo().retornarP()),step=1)
+        id = st.number_input("Ingresa tu id",min_value= 1 ,step=1)
         return id
 
     def pedirId2(self):

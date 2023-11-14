@@ -7,9 +7,11 @@ import random
 class aeropuesto:
     def __init__(self):
         self.avion = aeronave.Avion(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
-                 altMax=0, cantMotor=0, categoria="")
+                 altMax=0, cantMotor=0, categoria="",propietario="")
         self.heli = aeronave.Helicoptero(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="",destino="", cap=0, copi=0, az=0, pol=0, rotores=0,
-                 capEle=0, categoria="")
+                 capEle=0, categoria="",propietario="")
+        self.jet = aeronave.Jet(tipo="",velocidad=0, cantPas=0, autonomia=0, yearFab=0, estado="", ubi="", marca="", modelo="", destino="", cap=0, copi=0, az=0, pol=0,
+                 propietario="", servicios="", desFre=[])
 
     def generarAvion(self):
         self.avion.tipo = "Avión"
@@ -42,7 +44,8 @@ class aeropuesto:
                     "Modelo": self.avion.modelo,
                     "Destino": self.avion.destino,
                     "Sillas": self.avion.cantPas,
-                    "Categoria": self.avion.categoria
+                    "Categoria": self.avion.categoria,
+                    "Propietario": "---------------"
                 }
 
     def generarHelicoptero(self):
@@ -72,5 +75,37 @@ class aeropuesto:
                     "Modelo": self.heli.modelo,
                     "Destino":self.heli.destino,
                     "Sillas": self.heli.cantPas,
-                    "Categoria": self.heli.categoria
+                    "Categoria": self.heli.categoria,
+                    "Propietario": "---------------"
                 }
+    def generarJet(self):
+        self.jet.tipo = "Jet"
+        self.jet.yearFab = random.randint(2000, 2023)
+        self.jet.velocidad = random.randint(5, 15)
+        self.jet.cantPas = random.randint(10, 20)
+        self.jet.autonomia = random.randint(15, 30)
+        self.jet.marca = viewGeneral.viewGeneral().marca()
+        self.jet.propietario = viewGeneral.viewGeneral().propi()
+        st.write("Selcciona el destino")
+        self.jet.destino = viewGeneral.viewGeneral().persona.nacio()
+        self.jet.modelo = "Top AirService"
+        self.jet.estado = "En servicio"
+        if st.button('Creando nave', type="primary"):
+            if not self.jet.propietario:
+                st.error("Le recuerdo que debe ingresar un nombre")
+            else:
+                with st.spinner('enviando...'):
+                    time.sleep(3)
+                    st.success('Enviado!')
+                    return {
+                        "Tipo de nave": self.jet.tipo,
+                        "Año de viejo": self.jet.yearFab,
+                        "Estado": self.jet.estado,
+                        "Marca": self.jet.marca,
+                        "Modelo": self.jet.modelo,
+                        "Destino": self.jet.destino,
+                        "Sillas": self.jet.cantPas,
+                        "Categoria": "-------------",
+                        "Propietario": self.jet.propietario
+                    }
+

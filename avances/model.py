@@ -170,3 +170,7 @@ class modelo:
     def generarPuerta(self):
         torre.Torre(name="",loc="").generarPuertas()
         self.view.im()
+    def ubicarPuerta(self):
+        nav = self.retornarN()
+        ubi = torre.Torre(name="",loc="").ubicarPuerta(nav)
+        return ubi

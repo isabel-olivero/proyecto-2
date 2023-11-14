@@ -159,7 +159,10 @@ class control:
     def asignarTripu(self):
         lt = self.model.retornarT()
         cnt = self.view.pedirId()
-        self.view.verInfoTripulacion(lt,"Asignado",cnt)
+        b = st.button("Asignar tripulante")
+        if b:
+            self.view.verInfoTripulacion(lt,"Asignado",cnt)
+
 
 
 

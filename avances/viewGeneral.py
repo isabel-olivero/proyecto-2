@@ -147,7 +147,10 @@ class viewGeneral:
     def elemTorre(self):
         sel = st.selectbox("Que deseas hacer en torre", ['generarPuertas','ubicarPuerta','despegarAeronave','borrarAeronave','agregarHist'])
         return sel
-
+        
+    def im(self):
+        st.info("Se ha generado la puerta")
+        
     def propi(self):
         nombre= st.text_input("Ingresa nombre de propietario")
         if not nombre:

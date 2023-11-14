@@ -24,7 +24,9 @@ class control:
         sel = self.view.menu()
         st.session_state['Seleccion'] = sel
         if sel == 'Reservar':
+
             self.reservarNave()
+
         elif sel =='Registro como Pasajero':
             self.crearPasa()
         elif sel == 'Registro como Tripulante':
@@ -75,15 +77,31 @@ class control:
         self.view.verInfoTripulacion(liT)
 
 
+
+
+        #st.subheader(nom)
     def reservarNave(self):
-        nave = self.view.cualNave()
-        reLi = self.model.retornarP()
-        if len(reLi) == 0 :
+        uno =self.model.retornarP()
+        dos = self.model.retornarN()
+        if ((len(uno)==0)or(len(dos)==0)):
+            st.error("Debes registrar o falta crear nave")
+        else:
+            self.model.reserva()
+
+
+
+        '''pas = self.model.retornarP()
+        num = self.view.pedirId()
+        nave = self.model.retornarN()
+        na = self.view.pedirId2(len(nave))
+        if (len(pas) == 0) or (len(nave) == 0):
             self.view.error()
         else:
-            iden = self.view.pedirId(len(reLi))
-            pas = reLi[iden]
-            self.model.reserva(pas, nave)
+            self.model.reserva(num,na)
+            '''
+
+
+
     def crear(self):
         n = self.view.nave()
         if n == "Avión":
@@ -92,7 +110,7 @@ class control:
                 nA = self.cntA()
                 if nA <= 3:
                     numero = self.cnt()
-                    av = model.infoNaveModel(a["Tipo de nave"],a["Año de viejo"], a["Estado"], a["Marca"], a["Modelo"], a["Destino"], a["Sillas"], a['Categoria'],a["Propietario"])
+                    av = model.infoNaveModel(a["ID"], a["Tipo de nave"],a["Año de viejo"], a["Estado"], a["Marca"], a["Modelo"], a["Destino"], a["Sillas"], a['Categoria'],a["Propietario"])
                     self.model.ingresarNaves(numero, av)
                 else:
                     st.error("No se pueden crear más aviones")
@@ -102,7 +120,7 @@ class control:
                 nh = self.cntH()
                 if nh <= 3:
                     numero = self.cnt()
-                    he = model.infoNaveModel(h["Tipo de nave"],h["Año de viejo"], h["Estado"], h["Marca"], h["Modelo"], h["Destino"], h["Sillas"], h['Categoria'],h["Propietario"])
+                    he = model.infoNaveModel(h["ID"],h["Tipo de nave"],h["Año de viejo"], h["Estado"], h["Marca"], h["Modelo"], h["Destino"], h["Sillas"], h['Categoria'],h["Propietario"])
                     self.model.ingresarNaves(numero, he)
                 else:
                     st.error("No se pueden crear más Helicopteros")
@@ -112,7 +130,7 @@ class control:
                 nj = self.cntJ()
                 if nj <= 3:
                     numero = self.cnt()
-                    je = model.infoNaveModel(j["Tipo de nave"],j["Año de viejo"], j["Estado"], j["Marca"], j["Modelo"], j["Destino"], j["Sillas"], j['Categoria'],j["Propietario"])
+                    je = model.infoNaveModel(j["ID"],j["Tipo de nave"],j["Año de viejo"], j["Estado"], j["Marca"], j["Modelo"], j["Destino"], j["Sillas"], j['Categoria'],j["Propietario"])
                     self.model.ingresarNaves(numero,je)
                 else:
                     st.error("No se pueden crear más jets")

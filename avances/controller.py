@@ -13,6 +13,12 @@ class control:
         self.model = model.modelo()
         if 'cnt' not in st.session_state:
             st.session_state['cnt'] = 0
+        if 'cntA' not in st.session_state:
+            st.session_state['cntA'] = 0
+        if 'cntH' not in st.session_state:
+            st.session_state['cntH'] = 0
+        if 'cntJ' not in st.session_state:
+            st.session_state['cntJ'] = 0
         #self.infoPer = model.infoPasModel()
     def menu(self):
         sel = self.view.menu()
@@ -83,15 +89,33 @@ class control:
         if n == "Avión":
             a = self.model.generarAvion()
             if a:
-                numero = self.cnt()
-                av = model.infoNaveModel(a["Tipo de nave"],a["Año de viejo"], a["Estado"], a["Marca"], a["Modelo"], a["Destino"], a["Sillas"], a['Categoria'])
-                self.model.ingresarNaves(numero, av)
-        if n == "Helicóptero":
+                nA = self.cntA()
+                if nA <= 3:
+                    numero = self.cnt()
+                    av = model.infoNaveModel(a["Tipo de nave"],a["Año de viejo"], a["Estado"], a["Marca"], a["Modelo"], a["Destino"], a["Sillas"], a['Categoria'],a["Propietario"])
+                    self.model.ingresarNaves(numero, av)
+                else:
+                    st.error("No se pueden crear más aviones")
+        elif n == "Helicóptero":
             h = self.model.generarHelicoptero()
             if h:
-                numero = self.cnt()
-                he = model.infoNaveModel(h["Tipo de nave"],h["Año de viejo"], h["Estado"], h["Marca"], h["Modelo"], h["Destino"], h["Sillas"], h['Categoria'])
-                self.model.ingresarNaves(numero, he)
+                nh = self.cntH()
+                if nh <= 3:
+                    numero = self.cnt()
+                    he = model.infoNaveModel(h["Tipo de nave"],h["Año de viejo"], h["Estado"], h["Marca"], h["Modelo"], h["Destino"], h["Sillas"], h['Categoria'],h["Propietario"])
+                    self.model.ingresarNaves(numero, he)
+                else:
+                    st.error("No se pueden crear más Helicopteros")
+        else:
+            j = self.model.generarJet()
+            if j:
+                nj = self.cntJ()
+                if nj <= 3:
+                    numero = self.cnt()
+                    je = model.infoNaveModel(j["Tipo de nave"],j["Año de viejo"], j["Estado"], j["Marca"], j["Modelo"], j["Destino"], j["Sillas"], j['Categoria'],j["Propietario"])
+                    self.model.ingresarNaves(numero,je)
+            else:
+                st.error("No se pueden crear más jets")
     def mostrarNaves(self):
         nave = self.model.retornarN()
         self.view.verInfoNaves(nave)

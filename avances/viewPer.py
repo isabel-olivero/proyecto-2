@@ -139,7 +139,9 @@ class viewPer:
                     return {
                         "ID": iden,
                         "Nombre": name,
-                        "Telefono": tel
+                        "Telefono": tel,
+                        "Puesto": "---",
+                        "Maletas": maleta
                         }
 
     def datosTripulacion(self):
@@ -159,7 +161,7 @@ class viewPer:
         horas = st.slider('Cuantas horas trabajas?', 1, 20, 4)
         years = st.slider('Cuantos años de experiencia tienes? ', 0, 50, 4)
         puesto = st.selectbox("Cual es tu puesto de trabajo",
-                              ['Piloto', 'Copiloto', 'Trpulante de cabina', 'Policia aereo'])
+                              ['Piloto', 'Copiloto', 'Tripulante de cabina', 'Policia aereo'])
         if st.button('Enviar Informacion Personal',type="primary"):
             with st.spinner('enviando...'):
                 if (not nombre) or (not dire) or (not corr):
@@ -171,7 +173,9 @@ class viewPer:
                     return {
                         "ID": iden,
                         "Nombre": nombre,
-                        "Telefono": telefono
+                        "Telefono": telefono,
+                        "Puesto": puesto,
+                        "Maletas": "---"
                     }
 
     def verInfoPasajeros(self, lp):

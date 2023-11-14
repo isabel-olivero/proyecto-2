@@ -114,9 +114,11 @@ class modelo:
         if iden > len(reLi):
             st.error("Por ahora ese número no es valido")
         else:
-            p = reLi[iden + 1]
-            puesto = p.per
-            return puesto
+            a = list(reLi)
+            if((iden + 1) in a):
+                p = reLi[iden + 1]
+                puesto = p.per
+                return puesto
         # st.subheader(puesto)
 
     def dame_nombre(self):  # esta funcion retorna el nombre de la persona, que se encuentra en una de las posiciones de la lista de pasajeros
@@ -125,12 +127,15 @@ class modelo:
         if tefi > len(rePa):
             st.error("Por ahora ese número no es valido")
         else:
-            n = rePa[tefi]
-            nom = n.name
-            return nom
+            a = list(rePa)
+            if(tefi in rePa):
+                n = rePa[tefi]
+                nom = n.name
+                return nom
 
     def reserva(self): #como dice su nombre, es la que permite realizar una reserva
         sillas = self.dame_sillas()
+        st.title('sillas disponibles:')
         st.header(sillas)
 
         if( sillas == None):

@@ -41,6 +41,8 @@ class control:
             self.crear()
         elif sel == 'selecciona':
             self.view.fondo()
+        elif sel == 'Asignar tripulacion':
+            self.cambioDeEstado()
 
     def cnt(self):
         st.session_state['cnt'] = st.session_state['cnt'] + 1
@@ -74,7 +76,7 @@ class control:
 
     def mostrarTri(self):
         liT = self.model.retornarT()
-        self.view.verInfoTripulacion(liT)
+        self.view.verInfoTripulacion(liT,"No asignado")
 
 
 
@@ -137,6 +139,12 @@ class control:
     def mostrarNaves(self):
         nave = self.model.retornarN()
         self.view.verInfoNaves(nave)
+
+
+    def asignarTripu(self):
+        lt = self.model.retornarT()
+        cnt = self.view.pedirId()
+        self.view.verInfoTripulacion(lt,"Asignado",cnt)
 
 
 

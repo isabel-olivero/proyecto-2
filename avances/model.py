@@ -150,7 +150,7 @@ class modelo:
                 st.error("Lo sentimos ha ocurrido un error, trataremos de solucionarlo lo antes posible")
             else:
                 cual = viewGeneral.viewGeneral().cualNave()
-                no = vuelo.vuelo().reservar(cual,name)
+                no = vuelo.vuelo().reservar(cual,sillas,name)
                 if no == 1:
                     if st.button('Reservar'):
                         st.success("Reserva exitosa")
